@@ -122,7 +122,7 @@ func openClient() {
 
 func openPresence() {
 	// try until success
-	for range time.Tick(15 * time.Second) {
+	for range time.Tick(500 * time.Millisecond) {
 		if client.IsClosed() {
 			return // stop trying when mpv shuts down
 		}
@@ -152,7 +152,7 @@ func main() {
 	openClient()
 	go openPresence()
 
-	for range time.Tick(time.Second) {
+	for range time.Tick(5 * time.Second) {
 		activity, err := getActivity()
 		if err != nil {
 			if errors.Is(err, syscall.EPIPE) {
